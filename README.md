@@ -107,7 +107,7 @@ from kaliapay import CollectPayment
 result = CollectPayment.get_transaction_status("TXN_REFERENCE")
 print(result)
 ```
-**Les réponses** : 
+**Réponse 1 :**
 ```
 {
 "result": {
@@ -154,7 +154,7 @@ Ici, le client a été redirigé vers la page de paiement. Dans le bloc `"result
     "amount": 500,
     "status": "pending",
     "extra_data": "test_custom",
-    "apikey": "d0e632be844d55ad5c09b45d6e586fe6a64db6aa",
+    "apikey": "c6sd51c6dsc1ds6c1dsc1csc",
     "service": "020322171826010677",
     "notif_number": "0709430661",
     "comments": "",
@@ -165,4 +165,36 @@ Ici, le client a été redirigé vers la page de paiement. Dans le bloc `"result
 }
 ```
 
-Ici, le statut est `"INITIATED"`. Le client a sélectionné son canal de paiement préféré, dans l'exemple `"Orange Money"`. Nous constatons que l'opération n'est pas encore terminée. Dans le bloc `"payment_infos"`, nous avons tous les détails de la transaction. En cas de statut initialisé à `"success"`, `"successful"` ou encore `"failed"`, vous pouvez décider de fournir ou non le service. Toutes ces informations vous sont envoyées automatiquement à l'URL de notification que vous avez spécifiée lors de la création du service. Vous pourrez les conserver dans une base de données pour des raisons d'historique.
+Ici, le statut est `"INITIATED"`. Le client a sélectionné son canal de paiement préféré, dans l'exemple `"Orange Money"`. Nous constatons que l'opération n'est pas encore terminée. Dans le bloc `"payment_infos"`, nous avons tous les détails de la transaction. lorsque `status = pending` cela signifie que la transaction est en cours. `status = success` cela signifie que la transaction a reussie et enfin `success = failed` Cela signifie que la transaction a echoué.
+
+**Réponse 4 :**
+```
+{
+"result": {
+    "reference": "2eacf6b407a217fad781da55570e521238d410ab",
+    "status": "INITIATED",
+    "payment_infos": {
+    "name": "ORANGE",
+    "txnreference": "op4e391681-ecb4-4034-88c5-c005ea7e5dad07062022181013",
+    "shortreference": "6KEC841599",
+    "external_reference": "b947db90-ffd1-41f4-9bbd-aee9042a23b9",
+    "related_qrcode": "",
+    "related_qrcode_url": "",
+    "express_data": "2eacf6b407a217fad781da55570e521238d410ab",
+    "created_at": "07/06/2022 - 18:10:13",
+    "htime": "07/06/2022 - 18:10:13",
+    "amount": 500,
+    "status": "success", #Le status dans payment info est à "success"
+    "extra_data": "test_custom",
+    "apikey": "c6sd51c6dsc1ds6c1dsc1csc",
+    "service": "88878785454646464",
+    "notif_number": "0709430661",
+    "comments": "",
+    }
+},
+"state": "success",
+"message": "Action effectuée avec Succès"
+}
+```
+
+Ici, le `status` dans payment_infos est à `success`, ce qui signifie que la transaction est terminée et s'est déroulée avec succès !
